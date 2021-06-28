@@ -6,10 +6,12 @@ void main()
 
     //C（xが実部、yが虚部）
     //原点の調整
-    vec2 c = vec2(gl_FragCoord.x / 1280.0 -1.25, gl_FragCoord.y /720.0 -0.5);
+    vec2 c = vec2(gl_FragCoord.x / 512.0 -1.75, gl_FragCoord.y /512.0 -0.75);
 
     //発散したか否か
     bool frag=true;
+
+    float cnt=0.0;
 
     for(int i=0;i < 50;i++)
     {
@@ -17,13 +19,15 @@ void main()
         {
             //発散したら
             frag = false;
+            cnt=i/50.0;
             break;
         }
-        z = vec2(z.x * z.x + z.y + c.x, 2.0 * z.x * z.y + c.y);
+        //Z(n+1)=Zn*Zn+C
+        z = vec2(z.x * z.x - z.y * z.y + c.x, 2.0 * z.x * z.y + c.y);
     }
 
     if(!frag)
-        gl_FragColor = vec4(0.0,0.0,0.0,1.0);
+        gl_FragColor = vec4(0.0,cnt,cnt,1.0);
     else
         gl_FragColor = vec4(1.0,0.0,0.0,1.0);
 }
