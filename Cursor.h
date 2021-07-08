@@ -7,7 +7,7 @@ class Cursor
     private :
 
         //ウィンドウのポインタ
-        GLFWwindow *window;
+        GLFWwindow *const window;
 
         //1フレーム経ったかの判定に使用
         GLboolean frame=0;
@@ -15,7 +15,7 @@ class Cursor
 
         //コンストラクタ
         //WINDOW :ウィンドウのポインタ
-        Cursor(GLFWwindow *WINDOW)
+        Cursor(GLFWwindow *const WINDOW)
             :window(WINDOW)
         {}
 
@@ -29,28 +29,43 @@ class Cursor
         }
 
         //マウスが左クリックされたかどうか
-        //長押し無効
-        bool mLPorRs()
+        bool mLPorR(bool flag)
         {
-            if(frame==1)
-            {
-                if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE)
-                    frame=false;
-                return false;
-            }
-            else
-            {
-                if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
-                    frame=true;
+            if(flag)
                 return (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS);
-            }
+            else
+                if(frame==1)
+                {
+                    if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_RELEASE)
+                        frame=false;
+                    return false;
+                    }
+                else
+                {
+                    if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
+                        frame=true;
+                    return (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS);
+                }
         }
 
-        //マウスが左クリックされたかどうか
-        //長押し有効
-        bool mLPorRl()
+        //マウスが右クリックされたかどうか
+        bool mRPorR(bool flag)
         {
-            return (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS);
+            if(flag)
+                return (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_2) == GLFW_PRESS);
+            else
+                if(frame==1)
+                {
+                    if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_2) == GLFW_RELEASE)
+                        frame=false;
+                    return false;
+                    }
+                else
+                {
+                    if(glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
+                        frame=true;
+                    return (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_2) == GLFW_PRESS);
+                }
         }
 
 };

@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
-#include <utility>
+#include <iostream>
 #include <GL/glew.h>
+#include <GLFW/glfw3.h>
 using namespace std;
 
 class Mandelbrot
@@ -10,7 +10,7 @@ class Mandelbrot
 
         //頂点バッファオブジェクトと頂点配列オブジェクト
         GLuint vertex_vbo,vao;
-
+        
         //頂点？のデータを格納する配列
         GLfloat vertices[4][2] =
         {
@@ -49,12 +49,13 @@ class Mandelbrot
             glDeleteBuffers(1, &vertex_vbo);
         }
 
+        //描画の関数
         void draw()
         {
             //頂点配列オブジェクトの結合
             //描画する頂点配列オブジェクトを指定する
             glBindVertexArray(vao);
-
+            
             //描画
             glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         }
