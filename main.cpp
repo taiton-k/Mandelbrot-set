@@ -67,7 +67,7 @@ int main()
     //uniform変数originに渡す値
     GLint origin[2] = {0,0};
 
-    int order=60;
+    int order=120;
 
     //ウィンドウが開いている間繰り返す
     while(window)

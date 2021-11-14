@@ -15,7 +15,7 @@ class Window
     public :
 
         //コンストラクタ
-        Window(int width = 1280, int height = 720, const char *title = "Mandelbrot")
+        Window(int width = 1440, int height = 900, const char *title = "Mandelbrot")
             :window(glfwCreateWindow(width, height, title, NULL,NULL))
             ,point{0,0}
         {
@@ -62,7 +62,7 @@ class Window
         explicit operator bool ()
         {
             //イベントを取り出す
-            glfwPollEvents();
+            glfwWaitEvents();
 
             //カーソルの座標
             double x,y;
